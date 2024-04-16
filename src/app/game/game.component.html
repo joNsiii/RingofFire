@@ -1,0 +1,29 @@
+<app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{ 'top.px': 150 + (i * 150) }" [name]="player"
+  class="player-img current-player"></app-player>
+
+
+<div class="game-field">
+  <div class="card-stack">
+    <!-- cardstack -->
+    <img *ngFor="let c of [0, 1, 2, 3]; let i = index" src="../../assets/img/cards/card_cover.png"
+      [ngStyle]="{ 'left.px': i * 5 }" alt="cards" />
+
+    <!-- top card in cardstack -->
+    <img (click)="pickCard()" class="first-card" [ngStyle]="{ 'left.px': 20 }"
+      src="../../assets/img/cards/card_cover.png" alt="" />
+
+    <!-- played card on the table -->
+    <img *ngIf="playedCard" class="pick-card" [class.first-card]="hoverOverCard" [ngStyle]="{ 'left.px': 20 }"
+      src="../../assets/img/cards/{{ currentPlayedCard }}.png" alt="{{ currentPlayedCard }}" />
+
+    <!-- animated card that is flying -->
+    <img (click)="pickCard()" *ngIf="pickCardAnimation" class="pick-card" [class.first-card]="hoverOverCard"
+      [ngStyle]="{ 'left.px': 20 }" src="../../assets/img/cards/{{ currentCard }}.png" alt="{{ currentCard }}" />
+
+  </div>
+</div>
+
+<button mat-fab (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+
