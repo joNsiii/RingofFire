@@ -1,12 +1,24 @@
+
+<!-- if no player is added and we click on the card-stack. This text will be displayed -->
+@if (game.players.length == 0 && !game.btn) {
+  <mat-dialog-content>
+      Add a player to Start
+  </mat-dialog-content>
+
+}
+<!-- if we click on the 'add'-btn this text will be displayed in the dialog  -->
+@if(game.btn) {
 <h2 mat-dialog-title>Add new player?</h2>
 <mat-dialog-content>
     <p></p>
     <mat-form-field>
         <mat-label>What's your name?</mat-label>
-        <input matInput  [(ngModel)]="name">
+        <input matInput [(ngModel)]="name">
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button (click)="closeDialog()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="name" (click)="chooseName()" cdkFocusInitial>Ok</button>
+    <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" (click)="chooseName()"
+        >Ok</button>
 </mat-dialog-actions>
+}

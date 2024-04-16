@@ -1,7 +1,9 @@
+
+<!-- Displaying all players with forloop from 'players-array' -->
 <app-player *ngFor="let player of game.players; let i = index" [name]="player" [activePlayer]="i == game.currentPlayer"
   [ngStyle]="{ 'top.px': 150 + (i * 150) }" class="player" ></app-player>
 
-
+<!-- Our Field -->
 <div class="game-field">
   <div class="card-stack">
     <!-- cardstack -->
@@ -9,7 +11,7 @@
       [ngStyle]="{ 'left.px': i * 5 }" alt="cards" />
 
     <!-- top card in cardstack -->
-    <img (click)="pickCard()" class="first-card" [ngStyle]="{ 'left.px': 20 }"
+    <img (click)="filterClickedItem($event)" class="first-card" [ngStyle]="{ 'left.px': 20 }"
       src="../../assets/img/cards/card_cover.png" alt="" />
 
     <!-- played card on the table -->
@@ -17,12 +19,15 @@
       src="../../assets/img/cards/{{ currentPlayedCard }}.png" alt="{{ currentPlayedCard }}" />
 
     <!-- animated card that is flying -->
-    <img (click)="pickCard()" *ngIf="pickCardAnimation" class="pick-card" [class.first-card]="hoverOverCard"
+    <img  *ngIf="pickCardAnimation" class="pick-card" [class.first-card]="hoverOverCard"
       [ngStyle]="{ 'left.px': 20 }" src="../../assets/img/cards/{{ currentCard }}.png" alt="{{ currentCard }}" />
 
   </div>
 </div>
+<!-- todo-card COMPONENT -->
+<app-todo-card [card]="currentCard" class="todo-card"></app-todo-card>
 
-<button mat-fab (click)="openDialog()">
+<!-- Button to add some players -->
+<button mat-fab (click)="filterClickedItem($event)">
   <mat-icon>add</mat-icon>
 </button>

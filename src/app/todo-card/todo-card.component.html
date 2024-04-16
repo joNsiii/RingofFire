@@ -1,1 +1,5 @@
-<p>todo-card works!</p>
+<!-- our card that is displayed in the lower left corner. There will be showed the todo´s if u pick a card -->
+<mat-card class="card">
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-content class="content">{{ card ? description: 'Please add a player before u picking a card.' }}</mat-card-content>
+</mat-card>

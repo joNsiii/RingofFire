@@ -2,9 +2,11 @@ export class Game {
     public players: string[] = [];
     public stack: string[] = [];
     public playedCard: string[] = [];
-    public currentPlayer: number = 0;
+    public currentPlayer: number = -1;
+    public btn: boolean = false;
 
     constructor() {
+        // push all cards in 'stack-array'
         for (let i = 1; i < 14; i++) {
             this.stack.push(`ace_${i}`)
             this.stack.push(`clubs_${i}`)
@@ -15,7 +17,7 @@ export class Game {
         this.shuffle(this.stack)
     }
 
-
+    // shuffle array with cards
     shuffle(array: any) {
         let currentIndex = array.length;
         while (currentIndex != 0) {

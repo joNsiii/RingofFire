@@ -31,17 +31,20 @@ export class DialogAddPlayerComponent {
 
   name: string = '';
   avatar: string = '';
+  game = this.globalService.game;
 
 
   constructor(private globalService: GlobalService) {
 
   }
 
+  // add a player by enter a name and click on the 'OK'- btn
   chooseName() {
     this.name = '';
     this.globalService.chooseName()
   }
 
+  // close the dialog
   closeDialog() {
     this.globalService.closeDialog();
   }
