@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartscreenComponent } from './startscreen.component';
+import { TodoCardComponent } from './todo-card.component';
 
-describe('StartscreenComponent', () => {
-  let component: StartscreenComponent;
-  let fixture: ComponentFixture<StartscreenComponent>;
+describe('TodoCardComponent', () => {
+  let component: TodoCardComponent;
+  let fixture: ComponentFixture<TodoCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StartscreenComponent]
+      imports: [TodoCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(StartscreenComponent);
+    fixture = TestBed.createComponent(TodoCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

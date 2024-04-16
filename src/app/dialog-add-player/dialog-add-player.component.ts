@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { GlobalService } from '../global.service';
+
 
 @Component({
   selector: 'app-dialog-add-player',
@@ -30,9 +32,17 @@ export class DialogAddPlayerComponent {
   name: string = '';
   avatar: string = '';
 
-  onNoClick() {
-    this.name = '';
+
+  constructor(private globalService: GlobalService) {
+
   }
 
+  chooseName() {
+    this.name = '';
+    this.globalService.chooseName()
+  }
 
+  closeDialog() {
+    this.globalService.closeDialog();
+  }
 }

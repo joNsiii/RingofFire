@@ -49,16 +49,10 @@
   }
 }
 
-.player-img {
+.player {
   position: absolute;
   right: 0;
   padding: 20px;
-}
-
-.current-player {
-  background-color: rgba($color: #393939, $alpha: 0.5);
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
 }
 
 button {

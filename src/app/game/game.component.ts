@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Game } from '../../models/game';
+import { Component, Input, Output } from '@angular/core';
 import { PlayerComponent } from '../player/player.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { MatDialog } from '@angular/material/dialog';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-game',
@@ -21,53 +20,43 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './game.component.scss',
 })
 export class GameComponent {
+  [x: string]: any;
   hoverOverCard = true;
   pickCardAnimation = false;
   playedCard = false;
-  game: Game = new Game();
   currentCard: any;
   currentPlayedCard: string = '';
-  name: string = '';
-  dialogRef: any;
+  game = this.globalService.game;
 
-  constructor(public dialog: MatDialog) {
-    this.newGame();
-    console.log(this.game);
-  }
-
-  newGame() {
-    this.game;
-  }
+  constructor(private globalService: GlobalService) {}
 
   pickCard() {
-    if (!this.pickCardAnimation) {
-      this.pickCardAnimation = true;
-      this.hoverOverCard = false;
-      this.currentCard = this.game.stack.pop();
-      this.game.playedCard.push(this.currentCard);
-      this.playedCard = true;
+    if (this.game.players.length == 0) {
+      alert('add player to pick card´s');
+    } else {
+      if (!this.pickCardAnimation) {
+        this.pickCardAnimation = true;
+        this.hoverOverCard = false;
+        this.currentCard = this.game.stack.pop();
+        this.game.playedCard.push(this.currentCard);
+        this.playedCard = true;
 
-      setTimeout(() => {
-        this.pickCardAnimation = false;
-        this.currentPlayedCard = this.currentCard;
-      }, 1200);
+        setTimeout(() => {
+          this.highlightCurrentPlayer();
+          this.pickCardAnimation = false;
+          this.currentPlayedCard = this.currentCard;
+        }, 1200);
+      }
     }
   }
-
-  openDialog(): void {
-    this.dialogRef = this.dialog.open(DialogAddPlayerComponent, {
-      data: {name: this.name}
-    });
-    
-
-    this.dialogRef.afterClosed().subscribe((name: string) => {
-      if (name !== '') {
-        this.game.players.push(name);
-      }
-    });
+  openDialog() {
+    this.globalService.openDialog();
   }
 
-  closeDialog() {
-    this.dialogRef.close();
+  highlightCurrentPlayer() {
+    this.game.currentPlayer++;
+    if (this.game.currentPlayer > this.game.players.length - 1) {
+      this.game.currentPlayer = 0;
+    }
   }
 }
